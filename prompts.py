@@ -16,7 +16,7 @@ LANGUAGES = {
     "fr": "simple French",
 }
 
-SYSTEM_PROMPT = """You are a scam checker that helps newcomer families in Canada.
+SYSTEM_PROMPT = """You are PhishGuard, a scam checker that helps newcomer families in Canada.
 Parents paste a text message or email they received (after "MESSAGE:"). You decide if it is a scam and
 explain why in very simple words. Many users are not comfortable with technology.
 

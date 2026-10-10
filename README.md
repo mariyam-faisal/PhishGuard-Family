@@ -1,117 +1,120 @@
-# PhishGuard-Family
+<p align="center"><img src="assets/phishguard-mascot.png" alt="PhishGuard mascot: a goldfish knight with a shield" width="220"></p>
 
-## What is it?
-A tool that helps people check if a suspicious text or email is a scam.
-You paste the message (or upload a screenshot), and it explains in simple language what looks
-wrong and what to do next.
+# 🛡️ PhishGuard
 
-## Who does it help?
-Non-technical people, especially immigrant families, who find it hard to
-tell real messages from scams (fake CRA, Canada Post, bank, and job messages).
+**Paste a suspicious text or email. Get a clear answer in your own language, from an AI that runs entirely on your own computer.**
 
-## Our Entry
-- **Challenge:** Best Open-Source AI Project (main challenge)
-- **Type:** a project built on an open-weight small language model
-  (Gemma 3 4B, 4 billion parameters)
-- **License:** MIT
+Built at **Hacktoberfest x ElleHacks Hack Day** (October 10, 2026) for the *Best Open-Source AI Project* challenge.
 
-## Languages
-- English
-- Urdu (اردو)
-- Spanish (Español)
-- Arabic (العربية)
-- Hindi (हिन्दी)
-- French (Français)
+![PhishGuard screenshot](docs/screenshot.png)
 
-## Features
-- **Clear verdict:** Scam, Suspicious or Safe, shown in red, yellow or green
-- **Highlighted message:** the suspicious phrases are highlighted inside the
-  message you pasted
-- **Red flags and advice:** the warning signs, in simple words
-- **What to do now:** fixed, never AI-generated steps, such as forwarding scam
-  texts to 7726 and reporting to the Canadian Anti-Fraud Centre
-- **Warn my family:** a short shareable warning with a copy button. It never
-  includes names, phone numbers, emails or links from the original message.
-- **Screenshot upload:** the model reads the text from a screenshot, then
-  checks it
-- **Example messages:** one-click examples (a fake package fee, a fake CRA
-  message and a normal school reminder)
-- **Accessibility:** Easy mode (bigger text), right-to-left layout for Urdu
-  and Arabic, and a Read aloud button that uses the browser's voice
-- **Privacy:** everything runs on the user's computer, and a status light shows
-  whether the AI is running
-  
+---
+
+## The problem
+
+Scam texts pretending to be the CRA, Canada Post, banks or family members are everywhere, and they hit newcomer families and older parents hardest. Many aren't comfortable reading English fine print, and almost every scam-awareness tool is English-only.
+
+## What PhishGuard does
+
+1. You paste a message you received, or upload a **screenshot** of it.
+2. It answers **Scam**, **Suspicious** or **Looks safe**, with a colour, an icon and a word (never colour alone).
+3. It **highlights the exact suspicious phrases** in the message, like a fake link or "pay within 24 hours".
+4. It explains the **red flags** and **what this means** in short, simple sentences.
+5. It shows fixed, trusted **"What to do now"** steps: forward to **7726**, report to the **Canadian Anti-Fraud Centre (1-888-495-8501)**, call your bank.
+6. **Warn my family**: a short warning to copy into the family group chat. It never includes the scam's link, phone number or email.
+7. Works in **6 languages**: English, اردو Urdu, Español, العربية Arabic, हिन्दी Hindi, Français. Urdu and Arabic use right-to-left layout.
+
+## Who it helps
+
+- Parents and grandparents who get scam texts but aren't sure what's real
+- Newcomer families in Canada who read best in their own language
+- People with low vision or low literacy: **Easy mode** (bigger text), **Read aloud**, the Lexend font (designed for easier reading), a "Need help pasting?" guide, high contrast and large buttons
+- Community groups (schools, mosques, settlement services) who want a simple tool to share
+
+## Why an open-weight model, running locally
+
+Scam messages often contain names, addresses and account details. PhishGuard runs **Gemma 3 4B on the laptop with Ollama**, so **the message never leaves the computer**. It also works offline and costs nothing to run.
+
 ## How it works
-1. The user pastes a suspicious message and picks a language.
-2. **Rule checks run first** (`rules.py`). They catch known scam patterns for
-   certain: gift card or crypto payments, threats of arrest, requests for a
-   PIN or SIN, short links, and fake links pretending to be CRA, Canada Post
-   or a bank
-3. **The AI model explains** (`checker.py`). Gemma reads the message and the
-   rule findings, then returns a verdict, red flags, advice and a short
-   family warning in the chosen language.
-4. **The results are merged.** The rules can raise a verdict but never lower
-   it. If the model is not running, the app still shows the rule checks and
-   never calls a message "Safe" without the AI.
-5. **The family warning is cleaned.** Links, phone numbers and emails are
-   removed, so it is safe to share.
-6. **Fixed next steps** are shown in the chosen language (`resources.py`).
-7. **The app** (`app.py`) shows the result using Streamlit.
 
-Everything runs on the user's own computer. Messages are never sent online.
+```
+Message ──► rules.py (instant checks) ──► Gemma 3 4B via Ollama (prompts.py) ──► checker.py merges ──► app.py shows it
+              fake links, gift cards,        explains in the user's language,
+              threats, urgency, PIN/SIN...   using the rule findings as evidence
+```
 
-## Model used
-- **Model:** Gemma 3 4B (`gemma3:4b`), an open-weight model, run locally
-  with Ollama
-- **Size:** 4 billion parameters, so it is a small language model (10 billion
-  or fewer)
-- **License / terms:** https://ai.google.dev/gemma/terms
-- **Built by our team:** the prompt, the scam rules, the code that merges
-  rules with the AI, the multi-language support, and the test script
+Two layers working together:
 
-## Project files
-| File | What it does |
+- **`rules.py`: rule-based checks (no AI).** Regex checks catch what we know is a scam signal: lookalike links (`canadapost-redelivery.info` isn't Canada Post), short links (bit.ly), gift cards, crypto, threats of arrest, urgency, requests for a PIN/password/SIN, "Mom, it's my new number". Includes keywords in several languages.
+- **Gemma 3 4B: explanation.** The rule findings are passed to the model as evidence. It returns JSON with a verdict, red flags, advice, exact phrases to highlight and a family warning, in the chosen language.
+- **`checker.py`: the merge.** Rules can **raise** the verdict but never lower it, so the small model can't call a scam "safe". Highlights are kept only if they really appear in the message. Links, phone numbers and emails are stripped from the family warning. If the model isn't running, the app still shows the rule results.
+- **`resources.py`:** fixed "What to do now" steps and the privacy note in all 6 languages, never AI-generated, so the phone numbers are always correct.
+- **`app.py`:** the Streamlit interface, with our goldfish-knight mascot (`assets/`). All model output is HTML-escaped before display.
+
+## Model and license
+
+| | |
 |---|---|
-| `app.py` | The Streamlit app people see |
-| `checker.py` | Backend: runs the rules, asks the model, merges the results |
-| `rules.py` | Scam rule checks that run before the AI |
-| `prompts.py` | The instructions given to the model, in six languages |
-| `resources.py` | Fixed "what to do" steps and privacy note in every language |
-| `run_tests.py` | Runs our test messages and reports accuracy |
-| `DEMO_SCRIPT.md` | Our demo plan |
+| **Model** | **Gemma 3 4B** by Google: open-weight **small language model** (≤ 10B parameters) |
+| **Model terms** | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) |
+| **Runs with** | [Ollama](https://ollama.com), model `gemma3:4b` |
+| **This project's license** | [MIT](LICENSE) |
+
+### Key dependencies
+
+- [Streamlit](https://streamlit.io): web interface (Apache-2.0)
+- [ollama-python](https://github.com/ollama/ollama-python): talks to the local model (MIT)
+- Google Fonts: Lexend, Noto Nastaliq Urdu, Noto Naskh Arabic, Noto Sans Devanagari (SIL Open Font License)
 
 ## How to run it
-You need Python 3.9 or newer and [Ollama](https://ollama.com).
 
-1. Install Ollama and open it (it must stay running).
-2. Download the model:
+**1. Install Ollama and the model.** Download Ollama from [ollama.com/download](https://ollama.com/download), open it, then:
+
+```bash
+ollama pull gemma3:4b
 ```
-   ollama pull gemma3:4b
+
+**2. Install the Python packages:**
+
+```bash
+pip install -r requirements.txt
 ```
-3. Get the code:
+
+**3. Start the app:**
+
+```bash
+streamlit run app.py
 ```
-   git clone https://github.com/mariyam-faisal/PhishGuard-Family.git
-   cd PhishGuard-Family
+
+It opens at <http://localhost:8501>.
+
+## Testing
+
+```bash
+python checker.py      # 5 example messages, printed as JSON
+python run_tests.py    # 14 labelled test messages in English, Urdu and Spanish
 ```
-4. Install the packages:
-```
-   pip install -r requirements.txt
-```
-5. Start the app:
-```
-   streamlit run app.py
-```
-6. Open http://localhost:8501 in your browser.
+
+`run_tests.py` reports accuracy, how many scams were wrongly marked Safe, and whether any family warning leaked a link or number. Results are saved to `tests/results.md`.
+
+**Our results:** see [tests/results.md](tests/results.md).
+
+## Limitations
+
+- It's a helper, not a guarantee. The app tells users to confirm with the real organization through its official website or phone number.
+- A small model can make mistakes on unusual messages; the rule checks reduce, but don't remove, that risk.
+- It only reads the text; it doesn't open links or check websites.
+- Read-aloud voices depend on the voices installed on the computer.
+
+## Next steps
+
+- More languages (Punjabi, Tamil, Tagalog, Chinese), each checked by a native speaker
+- A browser extension or phone share-sheet so people can check a message in one tap
+- A "scam of the week" card for community groups
 
 ## Team
-- **Basmah Khalid**: AI and prompts (prompt design, scam test messages, testing)
-- **Areej Tariq**: Backend (Python code connecting the app to the model)
-- **Hibbah Owais**: Frontend (the Streamlit app people see)
-- **Mariyam Faisal**: GitHub, README and demo
 
-## License
-MIT. See the `LICENSE` file.
-
-## Disclaimer
-This is a helper, not a guarantee. When in doubt, contact the organization
-using its official website or phone number.
+- [Name]: AI & prompts (`prompts.py`, `resources.py`, tests)
+- [Name]: backend (`checker.py`, `rules.py`)
+- [Name]: frontend (`app.py`)
+- [Name]: GitHub, README & demo

@@ -1,5 +1,5 @@
 """
-checker.py - Backend for the Phishing Checker for Parents.
+checker.py - Backend for PhishGuard.
 
 Frontend usage:
 
