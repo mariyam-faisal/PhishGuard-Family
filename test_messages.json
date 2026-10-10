@@ -1,0 +1,72 @@
+[
+  {
+    "text": "CRA NOTICE: You owe $1,240 in unpaid taxes. Pay today using Google Play gift cards or a warrant will be issued for your arrest. Call Officer Brown at 1-888-555-0199 immediately.",
+    "language": "en",
+    "expected": "Scam"
+  },
+  {
+    "text": "Canada Revenue Agency: You are eligible for a tax refund of $486.20. Claim your refund before it expires: canada-revenue-refund.com/claim",
+    "language": "en",
+    "expected": "Scam"
+  },
+  {
+    "text": "Canada Post: Your package is on hold due to an unpaid shipping fee of $2.99. Pay within 24 hours or it will be returned: canadapost-redelivery.ca",
+    "language": "en",
+    "expected": "Scam"
+  },
+  {
+    "text": "آپ کا ٹی ڈی بینک اکاؤنٹ عارضی طور پر بند کر دیا گیا ہے۔ اسے دوبارہ کھولنے کے لیے فوراً اس لنک پر اپنی معلومات درج کریں: td-secure-verify.com",
+    "language": "ur",
+    "expected": "Scam"
+  },
+  {
+    "text": "INTERAC e-Transfer: You have received $350.00 from JOHN SMITH. To deposit the money, click here and select your bank: interac-deposit-secure.com/claim",
+    "language": "en",
+    "expected": "Scam"
+  },
+  {
+    "text": "گھر بیٹھے روزانہ 300 ڈالر کمائیں! کوئی تجربہ ضروری نہیں۔ ابھی واٹس ایپ پر رابطہ کریں اور شروع کرنے کے لیے 50 ڈالر رجسٹریشن فیس بھیجیں۔",
+    "language": "ur",
+    "expected": "Scam"
+  },
+  {
+    "text": "Hi Mom, it's me. I dropped my phone and this is my new number. I need $500 for an urgent bill, can you e-Transfer me right now? I can't talk on the phone, just text me.",
+    "language": "en",
+    "expected": "Scam"
+  },
+  {
+    "text": "میرے ساتھ بٹ کوائن میں صرف 500 ڈالر لگائیں اور ایک ہفتے میں 5000 ڈالر کمائیں۔ منافع کی گارنٹی ہے، یہ موقع صرف آج کے لیے ہے!",
+    "language": "ur",
+    "expected": "Scam"
+  },
+  {
+    "text": "Reminder from Maple Grove Public School: Picture day is this Thursday. Please make sure your child brings their order form to class.",
+    "language": "en",
+    "expected": "Safe"
+  },
+  {
+    "text": "Reminder: You have an appointment with Dr. Patel on Tuesday, October 14 at 3:30 PM. Please arrive 10 minutes early. Call the clinic if you need to reschedule.",
+    "language": "en",
+    "expected": "Safe"
+  },
+  {
+    "text": "السلام علیکم بہن، کل شام ہمارے گھر چائے پر آ جائیں۔ بچوں کو بھی ساتھ لے آئیں، بہت مزہ آئے گا۔",
+    "language": "ur",
+    "expected": "Safe"
+  },
+  {
+    "text": "Canada Post: Your parcel was delivered to your front door today at 2:14 PM.",
+    "language": "en",
+    "expected": "Safe"
+  },
+  {
+    "text": "Hola mamá, soy yo. Se me rompió el teléfono y este es mi número nuevo. Necesito que me mandes $400 por transferencia urgente, no puedo hablar ahora.",
+    "language": "es",
+    "expected": "Scam"
+  },
+  {
+    "text": "Hola vecina, el sábado hacemos una cena en casa a las 7. ¡Trae a los niños!",
+    "language": "es",
+    "expected": "Safe"
+  }
+]

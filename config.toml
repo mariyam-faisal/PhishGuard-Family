@@ -1,0 +1,12 @@
+[client]
+toolbarMode = "minimal"   # hides the Deploy button and developer menu
+
+[theme]
+base = "light"            # same look even if the laptop is in dark mode
+primaryColor = "#0E6E74"
+backgroundColor = "#FBF8F1"
+secondaryBackgroundColor = "#F1EDE3"
+textColor = "#0F1F3D"
+
+[browser]
+gatherUsageStats = false  # no usage data sent online
