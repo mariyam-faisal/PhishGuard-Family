@@ -42,11 +42,11 @@ tell real messages from scams (fake CRA, Canada Post, bank, and job messages).
   whether the AI is running
   
 ## How it works
- The user pastes a suspicious message and picks a language.
+1. The user pastes a suspicious message and picks a language.
 2. **Rule checks run first** (`rules.py`). They catch known scam patterns for
    certain: gift card or crypto payments, threats of arrest, requests for a
    PIN or SIN, short links, and fake links pretending to be CRA, Canada Post
-   or a bank.
+   or a bank
 3. **The AI model explains** (`checker.py`). Gemma reads the message and the
    rule findings, then returns a verdict, red flags, advice and a short
    family warning in the chosen language.
