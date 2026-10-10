@@ -20,16 +20,19 @@ Non-technical people, especially immigrant families, who find it hard to tell re
 - French (Français)
 
 ## Features
-- **Clear verdict:** Scam, Suspicious or Safe, shown in red, yellow or green
+- **Clear verdict:** Scam, Suspicious or Looks safe, shown with a colour, an icon and a word (never colour alone)
 - **Highlighted message:** the suspicious phrases are highlighted inside the message you pasted
 - **Red flags and advice:** the warning signs, in simple words
 - **What to do now:** fixed, never AI-generated steps, such as forwarding scam texts to 7726 and reporting to the Canadian Anti-Fraud Centre
 - **Warn my family:** a short shareable warning with a copy button. It never includes names, phone numbers, emails or links from the original message.
 - **Screenshot upload:** the model reads the text from a screenshot, then checks it
 - **Example messages:** one-click examples (a fake package fee, a fake CRA message and a normal school reminder)
-- **Accessibility:** Easy mode (bigger text), right-to-left layout for Urdu and Arabic, and a Read aloud button that uses the browser's voice
-- **Privacy:** everything runs on the user's computer, and a status light shows whether the AI is running
+- **Help pasting:** a short "Need help pasting a message?" guide in all six languages
+- **Accessibility:** a "Make text bigger" switch, right-to-left layout for Urdu and Arabic, the Lexend font (designed for easier reading) and a Read aloud button that uses the browser's voice
+- **Privacy:** the message is checked on the user's computer, and a status light shows whether the AI is running
 
+
+## How it works
 ## How it works
 ```
 Message --> rules.py --> Gemma 3 4B via Ollama --> checker.py --> app.py
@@ -56,6 +59,11 @@ Message --> rules.py --> Gemma 3 4B via Ollama --> checker.py --> app.py
 
 **Built by our team:** the prompt, the scam rules, the code that merges rules with the AI, the multi-language support and the app.
 
+## Key dependencies
+- **Streamlit:** the web interface (Apache-2.0)
+- **ollama-python:** talks to the local model (MIT)
+- **Google Fonts:** Lexend and open fonts for Urdu, Arabic and Hindi text (SIL Open Font License). The page loads these from the internet, so without a connection it falls back to the computer's default fonts.
+
 ## Project files
 | File | What it does |
 |---|---|
@@ -64,6 +72,7 @@ Message --> rules.py --> Gemma 3 4B via Ollama --> checker.py --> app.py
 | `rules.py` | Scam rule checks that run before the AI |
 | `prompts.py` | The instructions given to the model, in six languages |
 | `resources.py` | Fixed "what to do" steps and privacy note in every language |
+| `assets/` | The logo and mascot images |
 
 ## How to run it
 You need Python 3.9 or newer and [Ollama](https://ollama.com).
@@ -88,10 +97,19 @@ You need Python 3.9 or newer and [Ollama](https://ollama.com).
 ```
 6. Open http://localhost:8501 in your browser.
 
+## Screenshots
+<img width="730" height="431" alt="1" src="https://github.com/user-attachments/assets/d63eb693-0345-4e96-b109-dbf14e43ebc1" />
+<img width="734" height="428" alt="2" src="https://github.com/user-attachments/assets/aa02cc9a-3085-4b28-b55e-b8c1286025b1" />
+<img width="733" height="431" alt="3" src="https://github.com/user-attachments/assets/2f2cf363-87a6-4cc7-9b4b-803cad246e22" />
+<img width="733" height="428" alt="4" src="https://github.com/user-attachments/assets/d188c7a7-b367-4c37-9cce-df3101cc119e" />
+<img width="736" height="428" alt="5" src="https://github.com/user-attachments/assets/9501f9e0-8ca8-4e16-ad8e-421806df1962" />
+
+
 ## Limitations
 - It's a helper, not a guarantee. The app tells users to confirm with the real organization through its official website or phone number.
 - A small model can make mistakes on unusual messages. The rule checks reduce that risk but don't remove it.
 - It only reads the text. It doesn't open links or check websites.
+- A check can take around 20 seconds, especially the first one, while the model loads.
 - Read-aloud voices depend on the voices installed on the computer.
 
 ## Team
